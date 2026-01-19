@@ -2,9 +2,9 @@
   "name": "memento",
   "version": "1.0.0",
   "description": "Don't believe his lies. Context simulator and token optimizer for Claude Code — know exactly what you're loading before you hit rate limits.",
-  "author": "Oz",
-  "homepage": "https://github.com/oz/memento",
-  "repository": "https://github.com/oz/memento",
+  "author": "Oezguer Celebi",
+  "homepage": "https://www.linkedin.com/in/oezguercelebi/",
+  "repository": "https://github.com/oezguercelebi/memento-plugin",
   "license": "MIT",
   "keywords": [
     "context",

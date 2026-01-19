@@ -1,0 +1,69 @@
+{
+  "name": "memento",
+  "displayName": "Memento",
+  "version": "1.0.0",
+  "description": "Don't believe his lies. Context simulator and token optimizer for Claude Code — know exactly what you're loading before you hit rate limits.",
+  "author": "Oezguer Celebi",
+  "homepage": "https://www.linkedin.com/in/oezguercelebi/",
+  "repository": "https://github.com/oezguercelebi/memento-plugin",
+  "license": "MIT",
+  "icon": "camera",
+  "keywords": [
+    "context",
+    "tokens",
+    "optimization",
+    "rate-limits",
+    "memory",
+    "simulator"
+  ],
+  "commands": [
+    {
+      "name": "memento",
+      "description": "\"What do I know?\" — Analyze current project context and token usage. Like Leonard's condition, your context window has limits.",
+      "usage": "/memento [--json] [--detailed]"
+    },
+    {
+      "name": "memento:polaroid",
+      "description": "\"Take a Polaroid\" — Preview token cost before adding files to context. Don't trust your memory, trust the photo.",
+      "usage": "/memento:polaroid @file1 @file2 ..."
+    },
+    {
+      "name": "memento:tattoo",
+      "description": "\"The facts I choose to tattoo\" — Show what's ALWAYS loaded into context. These are your permanent memories.",
+      "usage": "/memento:tattoo"
+    },
+    {
+      "name": "memento:burn",
+      "description": "\"Burn the evidence\" — Get recommendations for reducing token usage. Identify what memories to destroy.",
+      "usage": "/memento:burn"
+    },
+    {
+      "name": "memento:case",
+      "description": "\"Investigate the case\" — Deep analysis comparing different context strategies. Like Leonard solving Teddy's case.",
+      "usage": "/memento:case [--json] [--export]"
+    },
+    {
+      "name": "memento:budget",
+      "description": "\"Plan within your condition\" — Calculate how many files you can add within a token budget. Know your limits.",
+      "usage": "/memento:budget <tokens> [--files <dir>] [--priority large|small|balanced]"
+    }
+  ],
+  "agents": [
+    {
+      "name": "leonard",
+      "description": "Context optimization specialist — helps reorganize your project to minimize token usage"
+    }
+  ],
+  "skills": [
+    {
+      "name": "token-estimation",
+      "description": "Token counting reference for accurate context size estimation"
+    }
+  ],
+  "requirements": {
+    "python": ">=3.8"
+  },
+  "optionalDependencies": {
+    "tiktoken": "For accurate token counts (falls back to estimation)"
+  }
+}
