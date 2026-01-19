@@ -15,14 +15,25 @@ Plan your context within a specific token budget. Know exactly what you can load
    - Optional: `--files src/` to analyze specific directory
    - Optional: `--priority large|small|balanced`
 
-2. Get current baseline:
+2. Resolve the Memento script path and get current baseline:
    ```bash
-   python3 ~/.claude/plugins/*/memento/scripts/count-tokens.py --project .
+   # Script discovery: tries paths in order until one succeeds
+   MEMENTO_SCRIPT=$(
+     for p in \
+       ~/.claude/plugins/memento/scripts/count-tokens.py \
+       .claude/plugins/memento/scripts/count-tokens.py \
+       ./scripts/count-tokens.py; do
+       [ -f "$p" ] && echo "$p" && break
+     done 2>/dev/null
+   )
+   [ -z "$MEMENTO_SCRIPT" ] && MEMENTO_SCRIPT=$(ls ~/.claude/plugins/*/memento/scripts/count-tokens.py 2>/dev/null | head -1)
+
+   python3 "$MEMENTO_SCRIPT" --project .
    ```
 
 3. If directory specified, analyze all files:
    ```bash
-   find [directory] -type f \( -name "*.ts" -o -name "*.js" -o -name "*.py" -o -name "*.go" -o -name "*.rs" -o -name "*.md" \) -exec python3 ~/.claude/plugins/*/memento/scripts/count-tokens.py {} +
+   find [directory] -type f \( -name "*.ts" -o -name "*.js" -o -name "*.py" -o -name "*.go" -o -name "*.rs" -o -name "*.md" \) -exec python3 "$MEMENTO_SCRIPT" {} +
    ```
 
 4. Present budget planner:

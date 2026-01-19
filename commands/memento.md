@@ -15,9 +15,21 @@ Analyze the token usage of your Claude Code project configuration to understand 
    python3 -c "import tiktoken" 2>/dev/null && echo "tiktoken available" || echo "tiktoken not found - will use estimates"
    ```
 
-2. Run the Memento token analyzer:
+2. Run the Memento token analyzer (with fallback path resolution):
    ```bash
-   python3 "$(dirname "$(which claude)")/../plugins/memento/scripts/count-tokens.py" --project . 2>/dev/null || python3 ~/.claude/plugins/*/memento/scripts/count-tokens.py --project . 2>/dev/null || python3 .claude/plugins/memento/scripts/count-tokens.py --project .
+   # Script discovery: tries paths in order until one succeeds
+   MEMENTO_SCRIPT=$(
+     for p in \
+       ~/.claude/plugins/memento/scripts/count-tokens.py \
+       .claude/plugins/memento/scripts/count-tokens.py \
+       ./scripts/count-tokens.py; do
+       [ -f "$p" ] && echo "$p" && break
+     done 2>/dev/null
+   )
+   # Fallback to glob pattern if not found
+   [ -z "$MEMENTO_SCRIPT" ] && MEMENTO_SCRIPT=$(ls ~/.claude/plugins/*/memento/scripts/count-tokens.py 2>/dev/null | head -1)
+   # Run analysis
+   python3 "$MEMENTO_SCRIPT" --project . || echo "Error: Memento script not found. Ensure the plugin is installed."
    ```
 
 3. Parse the JSON output and present results in this format:

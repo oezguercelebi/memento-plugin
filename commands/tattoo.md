@@ -18,9 +18,20 @@ Show all context that is ALWAYS loaded — your tattoos, the facts you've chosen
    - Enabled plugins (command metadata, not full content)
    - MCP server tool schemas
 
-2. Run analysis:
+2. Run analysis (with fallback path resolution):
    ```bash
-   python3 ~/.claude/plugins/*/memento/scripts/count-tokens.py --project .
+   # Script discovery: tries paths in order until one succeeds
+   MEMENTO_SCRIPT=$(
+     for p in \
+       ~/.claude/plugins/memento/scripts/count-tokens.py \
+       .claude/plugins/memento/scripts/count-tokens.py \
+       ./scripts/count-tokens.py; do
+       [ -f "$p" ] && echo "$p" && break
+     done 2>/dev/null
+   )
+   [ -z "$MEMENTO_SCRIPT" ] && MEMENTO_SCRIPT=$(ls ~/.claude/plugins/*/memento/scripts/count-tokens.py 2>/dev/null | head -1)
+
+   python3 "$MEMENTO_SCRIPT" --project .
    ```
 
 3. Present results showing the hierarchy:

@@ -10,9 +10,20 @@ Run a full investigation comparing your current context setup against optimized 
 
 ## Instructions
 
-1. Run complete analysis of current state:
+1. Run complete analysis of current state (with fallback path resolution):
    ```bash
-   python3 ~/.claude/plugins/*/memento/scripts/count-tokens.py --project .
+   # Script discovery: tries paths in order until one succeeds
+   MEMENTO_SCRIPT=$(
+     for p in \
+       ~/.claude/plugins/memento/scripts/count-tokens.py \
+       .claude/plugins/memento/scripts/count-tokens.py \
+       ./scripts/count-tokens.py; do
+       [ -f "$p" ] && echo "$p" && break
+     done 2>/dev/null
+   )
+   [ -z "$MEMENTO_SCRIPT" ] && MEMENTO_SCRIPT=$(ls ~/.claude/plugins/*/memento/scripts/count-tokens.py 2>/dev/null | head -1)
+
+   python3 "$MEMENTO_SCRIPT" --project .
    ```
 
 2. Generate "Case File" report:

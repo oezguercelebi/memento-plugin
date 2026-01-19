@@ -17,14 +17,26 @@ Like Leonard's Polaroids, this shows you what you're about to commit to memory.
    - Multiple files: `@file1.ts @file2.ts @file3.ts`
    - Glob patterns: `src/**/*.ts` (expand first)
 
-2. For each file, get token count:
+2. Resolve the Memento script path, then get token counts:
    ```bash
-   python3 ~/.claude/plugins/*/memento/scripts/count-tokens.py [filepath1] [filepath2] ...
+   # Script discovery: tries paths in order until one succeeds
+   MEMENTO_SCRIPT=$(
+     for p in \
+       ~/.claude/plugins/memento/scripts/count-tokens.py \
+       .claude/plugins/memento/scripts/count-tokens.py \
+       ./scripts/count-tokens.py; do
+       [ -f "$p" ] && echo "$p" && break
+     done 2>/dev/null
+   )
+   [ -z "$MEMENTO_SCRIPT" ] && MEMENTO_SCRIPT=$(ls ~/.claude/plugins/*/memento/scripts/count-tokens.py 2>/dev/null | head -1)
+
+   # Analyze specified files
+   python3 "$MEMENTO_SCRIPT" [filepath1] [filepath2] ...
    ```
 
 3. Also get current baseline for comparison:
    ```bash
-   python3 ~/.claude/plugins/*/memento/scripts/count-tokens.py --project .
+   python3 "$MEMENTO_SCRIPT" --project .
    ```
 
 4. Present results:
