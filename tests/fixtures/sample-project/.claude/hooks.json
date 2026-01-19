@@ -1,0 +1,8 @@
+{
+  "hooks": {
+    "pre-commit": {
+      "command": "npm run lint",
+      "description": "Run linter before commits"
+    }
+  }
+}
