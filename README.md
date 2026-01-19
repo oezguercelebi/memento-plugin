@@ -18,18 +18,33 @@ Claude Code users consistently hit rate limits because they don't know:
 
 ## Installation
 
-```bash
-# Add the marketplace (if not already added)
-/plugin marketplace add [your-github-username]/memento
+### Quick Install (Recommended)
 
-# Install the plugin
-/plugin install memento
+```bash
+curl -fsSL https://raw.githubusercontent.com/oezguercelebi/memento-plugin/main/install.sh | bash
 ```
 
-Or install directly from GitHub:
+### Manual Install
+
 ```bash
-/plugin install memento@[your-github-username]/memento
+# Create plugins directory if it doesn't exist
+mkdir -p ~/.claude/plugins
+
+# Clone the repository
+git clone https://github.com/oezguercelebi/memento-plugin.git ~/.claude/plugins/memento
+
+# Optional: Install tiktoken for accurate token counting
+pip install tiktoken
 ```
+
+### Verify Installation
+
+Restart Claude Code, then run:
+```
+/memento
+```
+
+You should see a token analysis of your current context.
 
 ## Commands
 
@@ -176,11 +191,7 @@ Found a bug? Have a suggestion?
 
 ## Feedback
 
-Which command do you use most?
-- 👍 React on [this discussion](link) for /memento
-- 🎉 React for /memento:polaroid
-- ❤️ React for /memento:burn
-- 🚀 React for /memento:budget
+Questions, bugs, or feature requests? [Open an issue](https://github.com/oezguercelebi/memento-plugin/issues).
 
 ## License
 
