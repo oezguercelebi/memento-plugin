@@ -1,0 +1,26 @@
+{
+  "hooks": [
+    {
+      "matcher": {
+        "event": "SessionStart"
+      },
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python3 ~/.claude/plugins/*/memento/scripts/log-session.py --event start --project \"$PWD\" --quiet 2>/dev/null || true"
+        }
+      ]
+    },
+    {
+      "matcher": {
+        "event": "Stop"
+      },
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python3 ~/.claude/plugins/*/memento/scripts/log-session.py --event stop --project \"$PWD\" --quiet 2>/dev/null || true"
+        }
+      ]
+    }
+  ]
+}
