@@ -1,6 +1,6 @@
 {
   "name": "memento",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Don't believe his lies. Context simulator and token optimizer for Claude Code — know exactly what you're loading before you hit rate limits.",
   "author": {
     "name": "Oezguer Celebi",
