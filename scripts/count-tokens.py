@@ -147,11 +147,16 @@ def find_claude_configs(root: Path) -> dict:
     return configs
 
 
-def analyze_project(root_path: str = ".") -> dict:
+def analyze_project(root_path: str = ".", system_estimate: Optional[int] = None) -> dict:
     """Full project context analysis."""
     root = Path(root_path).resolve()
     configs = find_claude_configs(root)
-    
+
+    # System prompt varies by enabled features:
+    # Base: ~8k | +Web search: 1.5k | +MCP servers: 0.5-2k each
+    # +Computer use: 2k | +Memory: 0.5k → Range: 8k-20k+
+    system_tokens = system_estimate if system_estimate is not None else 10000
+
     results = {
         "project_root": str(root),
         "tiktoken_available": TIKTOKEN_AVAILABLE,
@@ -173,10 +178,8 @@ def analyze_project(root_path: str = ".") -> dict:
             "total_project_tokens": 0
         },
         "estimates": {
-            # System prompt varies by enabled features:
-            # Base: ~8k | +Web search: 1.5k | +MCP servers: 0.5-2k each
-            # +Computer use: 2k | +Memory: 0.5k → Range: 8k-20k+
-            "system_prompt_tokens": 10000,  # Conservative baseline estimate
+            "system_prompt_tokens": system_tokens,
+            "system_prompt_custom": system_estimate is not None,
             "baseline_total": 0
         }
     }
@@ -284,13 +287,19 @@ def main():
         default=200000,
         help="Context window budget in tokens (default: 200000)"
     )
-    
+    parser.add_argument(
+        "--system-estimate", "-s",
+        type=int,
+        default=None,
+        help="Override system prompt token estimate (default: 10000)"
+    )
+
     args = parser.parse_args()
     
     if args.files:
         results = analyze_files(args.files)
     else:
-        results = analyze_project(args.project)
+        results = analyze_project(args.project, system_estimate=args.system_estimate)
         results["budget"] = args.budget
         results["budget_remaining"] = args.budget - results["estimates"]["baseline_total"]
         results["budget_used_percent"] = round(

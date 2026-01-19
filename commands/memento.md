@@ -89,3 +89,7 @@ Analyze the token usage of your Claude Code project configuration to understand 
 $ARGUMENTS may contain:
 - `--json` — Output raw JSON instead of formatted display
 - `--detailed` — Show all files, not just top consumers
+- `--system-estimate N` — Override system prompt token estimate (default: 10000)
+  Example: `/memento --system-estimate 15000` for heavy MCP/tool usage
+
+Pass `--system-estimate` to the Python script when specified by the user.
