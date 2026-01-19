@@ -36,4 +36,4 @@ All notable changes to Memento will be documented in this file.
 ### Technical Details
 - Discovers Claude Code configs automatically (CLAUDE.md, skills, commands, agents, hooks, MCP)
 - Dual-mode counting: tiktoken (accurate) or character estimation (~4 chars/token)
-- Token budget constants: 12k system prompt, 15k excellent baseline, 50k critical threshold
+- Token budget constants: ~10k system prompt estimate (actual: 8-15k depending on features), 15k excellent baseline, 50k critical threshold

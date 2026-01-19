@@ -47,7 +47,7 @@ Commands reference the token script at `~/.claude/plugins/*/memento/scripts/coun
 | The Condition | 200k token context limit |
 
 ### Token Budget Constants
-- System prompt: ~12k tokens (fixed)
+- System prompt: ~8-15k tokens (varies by enabled features)
 - Target baseline: <15k tokens (Excellent)
 - Warning threshold: >50k tokens (Critical)
 - Context limit: 200k tokens

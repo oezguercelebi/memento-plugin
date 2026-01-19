@@ -103,7 +103,7 @@ Your system:
 ┌─────────────────────────────────────────────────────────────────┐
 │ Component              │ Tokens    │ Files │ Notes             │
 ├────────────────────────┼───────────┼───────┼───────────────────┤
-│ System Prompt          │ ~12,000   │   -   │ (estimated)       │
+│ System Prompt          │ ~8-15k    │   -   │ (varies by setup) │
 │ CLAUDE.md files        │   3,240   │   2   │                   │
 │ Skills                 │   4,500   │   3   │ load on-demand    │
 │ Commands               │     450   │   5   │ metadata only     │
@@ -168,11 +168,19 @@ This plugin is your mirror for context management. It doesn't change how Claude 
 
 ## Contributing
 
-Found a bug? Have a suggestion? 
+Found a bug? Have a suggestion?
 
 1. Open an issue
 2. Submit a PR
 3. Share your optimization tips
+
+## Feedback
+
+Which command do you use most?
+- 👍 React on [this discussion](link) for /memento
+- 🎉 React for /memento:polaroid
+- ❤️ React for /memento:burn
+- 🚀 React for /memento:budget
 
 ## License
 

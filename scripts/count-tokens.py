@@ -173,7 +173,10 @@ def analyze_project(root_path: str = ".") -> dict:
             "total_project_tokens": 0
         },
         "estimates": {
-            "system_prompt_tokens": 12000,  # Rough estimate
+            # System prompt varies by enabled features:
+            # Base: ~8k | +Web search: 1.5k | +MCP servers: 0.5-2k each
+            # +Computer use: 2k | +Memory: 0.5k → Range: 8k-20k+
+            "system_prompt_tokens": 10000,  # Conservative baseline estimate
             "baseline_total": 0
         }
     }

@@ -44,7 +44,7 @@ Analyze the token usage of your Claude Code project configuration to understand 
 ┌─────────────────────────────────────────────────────────────────┐
 │ Component              │ Tokens    │ Files │ Notes             │
 ├────────────────────────┼───────────┼───────┼───────────────────┤
-│ System Prompt          │ ~12,000   │   -   │ (estimated)       │
+│ System Prompt          │ ~8-15k    │   -   │ (varies by setup) │
 │ CLAUDE.md files        │   X,XXX   │   X   │                   │
 │ Skills                 │   X,XXX   │   X   │ load on-demand    │
 │ Commands               │   X,XXX   │   X   │ metadata only     │

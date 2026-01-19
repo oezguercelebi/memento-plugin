@@ -11,7 +11,7 @@ Show all context that is ALWAYS loaded — your tattoos, the facts you've chosen
 ## Instructions
 
 1. Identify all "permanent" context sources:
-   - System prompt (always present, ~12k tokens estimated)
+   - System prompt (always present, ~8-15k tokens depending on features)
    - User-level CLAUDE.md (`~/.claude/CLAUDE.md`)
    - Project-level CLAUDE.md (`./CLAUDE.md` or `./.claude/CLAUDE.md`)
    - User-level settings
@@ -44,11 +44,12 @@ Show all context that is ALWAYS loaded — your tattoos, the facts you've chosen
 
 🔒 SYSTEM TATTOOS (Cannot be removed)
 ┌─────────────────────────────────────────────────────────────────┐
-│ Claude System Prompt                         ~12,000 tokens     │
-│ ├── Core instructions                                           │
+│ Claude System Prompt                      ~8,000-15,000 tokens  │
+│ ├── Core instructions (~8k base)                                │
 │ ├── Tool definitions                                            │
-│ ├── Safety guidelines                                           │
-│ └── Feature-specific context                                    │
+│ ├── +Web search (~1.5k if enabled)                              │
+│ ├── +MCP servers (~0.5-2k each)                                 │
+│ └── +Other features (computer use, memory)                      │
 └─────────────────────────────────────────────────────────────────┘
 
 🏠 USER TATTOOS (~/.claude/)

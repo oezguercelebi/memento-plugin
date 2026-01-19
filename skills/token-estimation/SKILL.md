@@ -21,13 +21,28 @@ description: Token counting and context estimation expertise. Use when analyzing
 
 | Component | Typical Size | Recommendation |
 |-----------|--------------|----------------|
-| System prompt | ~12,000 | Fixed, cannot change |
+| System prompt | 8,000-15,000 | Varies by features (see below) |
 | CLAUDE.md (project) | 500-2,000 | Keep under 2,000 |
 | CLAUDE.md (user) | 500-1,000 | Keep minimal |
 | Skills (each) | 500-3,000 | Load on-demand |
 | Commands (each) | 100-500 | Metadata only |
 | Agents (each) | 500-2,000 | Metadata only |
 | MCP schemas | 200-1,000 | Per server |
+
+### System Prompt Breakdown
+
+The system prompt size varies based on enabled Claude Code features:
+
+| Feature | Adds Tokens | Notes |
+|---------|-------------|-------|
+| Base system prompt | ~8,000 | Core instructions, always present |
+| Web search | +1,500 | When web tools enabled |
+| MCP servers | +500-2,000 | Per server, depends on tool count |
+| Computer use/browser | +2,000 | When enabled |
+| Memory | +500 | When enabled |
+| **Total range** | **8,000-20,000+** | Depends on configuration |
+
+For estimation, we use **~10,000** as a conservative baseline (typical setup without heavy MCP usage).
 
 ### Optimal Baseline Targets
 
@@ -61,7 +76,7 @@ tokens = (len(text) // 4) + (lines * 2)  # Account for newlines
 ### Claude Code Context Sources
 
 **Always Loaded (Tattoos)**:
-1. System prompt (~12k, fixed)
+1. System prompt (~8-15k, varies by features)
 2. User CLAUDE.md (`~/.claude/CLAUDE.md`)
 3. Project CLAUDE.md (`./CLAUDE.md`, `./.claude/CLAUDE.md`)
 4. Command descriptions (metadata only)
